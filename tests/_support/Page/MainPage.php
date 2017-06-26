@@ -7,29 +7,28 @@ use Page\Element\SearchForm;
 class MainPage extends BasePage
 {
     protected $URL = '/';
-    private $searchForm;
+
+    private $searchField = '.gsfi';
+    private $searchButton = './/*[@name = \'btnK\']';
+    private $meLuckButton = './/*[@name = \'btnI\']';
+    private $searchKeyboardButton = '#gs_ok0';
+    private $voiceInputButton = '#gsri_ok0';
 
     public function __construct(\AcceptanceTester $I)
     {
         parent::__construct($I);
-
-        $formLocator = '.tsf';
-
-        $this->searchForm = new SearchForm($I, $formLocator);
     }
 
     public function waitForLoad()
     {
-        $this->tester->waitForElement($this->searchForm->getLocator());
+        $this->tester->waitForElement($this->searchField);
 
         return $this;
     }
 
     public function search($query)
     {
-        $this->searchForm->searchField()->fillField($query);
-        $this->searchForm->searchField()->sendKey(\WebDriverKeys::ENTER);
-        $page = new SearchResultPage($this->tester);
-        return $page;
+        $this->tester->fillField($this->searchField, $query);
+        $this->tester->pressKey($this->searchField, \WebDriverKeys::ENTER);
     }
 }

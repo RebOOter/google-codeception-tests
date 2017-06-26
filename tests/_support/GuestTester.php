@@ -10,4 +10,18 @@ class GuestTester extends AcceptanceTester
 
         $this->currentPage = new \Page\BasePage($this);
     }
+
+    public function waitForSearchResults()
+    {
+        $searchResultsPage = new \Page\SearchResultPage($this->getTester());
+
+        $searchResultsPage->waitForLoad();
+    }
+
+    public function openMainPage()
+    {
+        $mainPage = new \Page\MainPage($this);
+        $mainPage->open();
+        $mainPage->waitForLoad();
+    }
 }

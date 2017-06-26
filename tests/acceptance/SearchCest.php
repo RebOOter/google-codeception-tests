@@ -4,6 +4,8 @@ use Page\SearchResultPage;
 
 class SearchCest
 {
+    private $text = 'Codeception';
+
     public function _before()
     {
 
@@ -11,32 +13,29 @@ class SearchCest
 
     public function checkFirstSearchTitle(GuestTester $I)
     {
-        $I->currentPage = new \Page\MainPage($I);
-
-        $I->currentPage
-            ->open()
-            ->waitForLoad()
-            ->search('Codeception')
-            ->waitForLoad()
-            ->searchResultList()
-            ->assertTitle('Codeception', 0);
+        $I->openMainPage();
+        $I->search($this->text);
+        $I->waitForSearchResults();
+        $I->seeInSearchTitle($this->text, 1);
     }
 
     public function checkSearchTitles(GuestTester $I)
     {
-        $I->search('Codeception')->waitForLoad();
-        $searchPage = new SearchResultPage($I);
-        for ($i = 0; $i < 10; $i++) {
-            $searchPage->searchResultList()->assertTitle('Codeception', $i);
+        $I->openMainPage();
+        $I->search($this->text);
+        $I->waitForSearchResults();
+        for ($i = 1; $i <= 10; $i ++) {
+            $I->seeInSearchTitle($this->text, 1);
         }
     }
 
     public function checkSearchTexts(GuestTester $I)
     {
-        $I->search('Codeception')->waitForLoad();
-        $searchPage = new SearchResultPage($I);
-        for ($i = 0; $i < 10; $i++) {
-            $searchPage->searchResultList()->assertText('Codeception', $i);
+        $I->openMainPage();
+        $I->search($this->text);
+        $I->waitForSearchResults();
+        for ($i = 1; $i <= 10; $i ++) {
+            $I->seeInSearchText($this->text, 1);
         }
     }
 }
