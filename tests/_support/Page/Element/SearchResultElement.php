@@ -16,7 +16,7 @@ class SearchResultElement extends BaseElement
     {
         parent::__construct($I, $locator);
 
-        $this->title = new TextElement($I, $locator . '/h3/a');
+        $this->title = new TextElement($I, $locator . '//a/h3');
         $this->link = new TextElement($I, $locator . '//cite');
         $this->dropDown = new DropDownElement($I, $locator . '//div[@class = \'action-menu ab_ctl\']');
         $this->text = new TextElement($I, $locator . '//span[@class = \'st\']');

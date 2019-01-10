@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: reboo
- * Date: 07.06.2017
- * Time: 23:02
- */
 
 namespace Page;
 
@@ -19,6 +13,13 @@ class SearchResultPage extends BasePage
     {
         parent::__construct($I);
 
+        /*
+         * In this case we build structure of classes as they presented in DOM. With this solution
+         * it would be easy to fix usages of elements if they will be changed in DOM.
+         * For example, in commit with this comment I changed only two little parts in selector
+         * ('.//div[@class = 'srg']/div[$i]/div/div/h3/a' has been changed './/div[@class = 'srg']/div[$i]//a/h3')
+         * instead of another big changes (Google changed DOM on their side).
+         */
         $searchResultListLocator = './/div[@class = \'srg\']';
 
         $this->searchResultList = new SearchResultListElement($I, $searchResultListLocator);

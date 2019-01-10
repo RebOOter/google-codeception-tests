@@ -17,7 +17,7 @@ class SearchResultListElement extends BaseElement
 
         for ($i = 1; $i <= self::ELEMENTS_PER_PAGE; $i++)
         {
-            $this->searchResultElements[] = new SearchResultElement($I, $locator . "/div[$i]/div/div");
+            $this->searchResultElements[] = new SearchResultElement($I, $locator . "/div[$i]");
         }
     }
 

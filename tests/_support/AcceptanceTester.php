@@ -22,6 +22,7 @@ class AcceptanceTester extends \Codeception\Actor
 
     public $currentPage;
 
+    //This is just an example for using trait
     public function getTester()
     {
         return $this;

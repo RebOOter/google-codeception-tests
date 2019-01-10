@@ -9,12 +9,9 @@ class SearchCest
 
     }
 
-    public function checkFirstSearchTitle(GuestTester $I)
+    public function checkFirstSearchTitle(\Page\MainPage $mainPage)
     {
-        $I->currentPage = new \Page\MainPage($I);
-
-        $I->currentPage
-            ->open()
+        $mainPage->open()
             ->waitForLoad()
             ->search('Codeception')
             ->waitForLoad()
